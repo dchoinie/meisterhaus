@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Hero = (): JSX.Element => {
   return (
-    <div className="h-screen w-full absolute top-0 left-0">
+    <div className="h-screen w-full relative">
       <Image
         src="/lake_sakatah.webp"
         alt="Lake Sakatah"

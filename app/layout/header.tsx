@@ -3,7 +3,7 @@ import Container from "../custom_components/container";
 import NavItem from "../custom_components/navItem";
 import { Button } from "@/components/ui/button";
 
-const navItems = [
+export const navItems = [
   {
     label: "Home",
     href: "/",
@@ -28,7 +28,7 @@ const navItems = [
 
 const Header = (): JSX.Element => {
   return (
-    <div className="relative z-50">
+    <div className="absolute top-0 left-0 w-full z-50">
       <Container>
         <div className="flex justify-between py-6">
           <div className="flex gap-16">
