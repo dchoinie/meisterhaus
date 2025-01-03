@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface RoomCardProps {
   name: string;
@@ -32,7 +33,9 @@ const RoomCard = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">
-        <Image src={image} alt={name} width={600} height={600} />
+        <AspectRatio ratio={16 / 9}>
+          <Image src={image} alt={name} fill className="object-cover" />
+        </AspectRatio>
         <CardDescription className="mt-6">{description}</CardDescription>
       </CardContent>
       <CardFooter className="mt-auto">
@@ -40,7 +43,7 @@ const RoomCard = ({
           asChild
           className="bg-primary-500 hover:bg-primary-600 text-white font-cinzel-decorative"
         >
-          <Link href={link}>Book Now</Link>
+          <Link href={link}>Request Booking</Link>
         </Button>
       </CardFooter>
     </Card>

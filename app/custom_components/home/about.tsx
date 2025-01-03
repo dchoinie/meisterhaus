@@ -21,13 +21,8 @@ const features = [
 
 const About = (): JSX.Element => {
   return (
-    <div className="relative">
+    <div className="relative my-24">
       <Container>
-        <div className="my-24">
-          <h2 className="text-4xl font-bold text-center font-cinzel-decorative text-primary-500">
-            About
-          </h2>
-        </div>
         <div className="flex gap-12">
           <div className="flex flex-col w-1/2">
             <h2 className="text-4xl font-bold font-cinzel-decorative text-primary-500">
@@ -68,7 +63,7 @@ const About = (): JSX.Element => {
               className="rounded-lg w-full h-[250px] object-cover"
             />
             <Image
-              src="/house_1.png"
+              src="/meisterhaus_sign.avif"
               alt="House view 1"
               width={500}
               height={300}

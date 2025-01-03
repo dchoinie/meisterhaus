@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Cinzel_Decorative } from "next/font/google";
-import Layout from "./layout/layout";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${cinzelDecorative.variable} antialiased`}
       >
-        <Layout>{children}</Layout>
+        {children}
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
 import Container from "../custom_components/container";
 import { navItems } from "./header";
-import NavItem from "../custom_components/navItem";
+import NavItem, { NavItemProps } from "../custom_components/navItem";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = (): JSX.Element => {
@@ -10,8 +10,14 @@ const Footer = (): JSX.Element => {
       <Container>
         <div className="flex flex-col items-center">
           <div className="flex gap-12">
-            {navItems.map((item) => (
-              <NavItem key={item.label} label={item.label} href={item.href} />
+            {navItems.map((item: NavItemProps) => (
+              <NavItem
+                key={item.label}
+                label={item.label}
+                href={item.href}
+                textColor="text-primary-100"
+                textColorHover="text-white"
+              />
             ))}
           </div>
           <div className="flex gap-12 my-6 text-primary-100">

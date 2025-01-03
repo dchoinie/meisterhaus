@@ -1,9 +1,18 @@
 import Link from "next/link";
 import React from "react";
 
-const NavItem = ({ label, href }: { label: string; href: string }) => {
+export interface NavItemProps {
+  label: string;
+  href: string;
+  textColor?: string;
+  textColorHover?: string;
+}
+
+const NavItem = ({ label, href, textColor, textColorHover }: NavItemProps) => {
   return (
-    <div className="text-primary-100 hover:text-white font-cinzel-decorative">
+    <div
+      className={`${textColor} hover:${textColorHover} font-cinzel-decorative`}
+    >
       <Link href={href}>{label}</Link>
     </div>
   );

@@ -17,7 +17,7 @@ const Hero = (): JSX.Element => {
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-neutral-50 bg-gradient-to-br from-neutral-900/80 to-neutral-900/40">
         <h1
-          className={`text-5xl font-bold mb-4 font-cinzel-decorative text-primary-100`}
+          className={`text-5xl font-bold font-cinzel-decorative text-primary-100`}
         >
           Meisterhaus Bed & Breakfast
         </h1>
@@ -30,7 +30,7 @@ const Hero = (): JSX.Element => {
             className="bg-primary-500 font-cinzel-decorative"
             asChild
           >
-            <Link href="/book-now">Book Now</Link>
+            <Link href="/book">Request Booking</Link>
           </Button>
           <Button
             variant="outline"
