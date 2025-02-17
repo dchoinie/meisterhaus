@@ -4,12 +4,6 @@ import React, { JSX } from "react";
 import Container from "../container";
 import Link from "next/link";
 import ContactForm from "../contactForm";
-import { z } from "zod";
-import { contactFormSchema } from "../contactForm";
-
-const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
-  console.log(data);
-};
 
 const Contact = (): JSX.Element => {
   return (
@@ -41,7 +35,7 @@ const Contact = (): JSX.Element => {
               .
             </p>
             <div>
-              <ContactForm onSubmit={onSubmit} />
+              <ContactForm />
             </div>
           </div>
         </div>
