@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -66,6 +66,7 @@ const BookingRequestForm = ({
 }: BookingRequestFormProps) => {
   const [checkInOpen, setCheckInOpen] = React.useState(false);
   const [checkOutOpen, setCheckOutOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof bookingFormSchema>>({
     resolver: zodResolver(bookingFormSchema),
@@ -85,10 +86,28 @@ const BookingRequestForm = ({
     onCancel();
   };
 
+  const onSubmitForm = async (data: z.infer<typeof bookingFormSchema>) => {
+    setIsSubmitting(true);
+    await onSubmit(data);
+    setTimeout(() => {
+      form.reset();
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        action="https://formspree.io/f/xvgzvwea"
+        method="POST"
+        onSubmit={(e) => {
+          const isValid = form.trigger();
+          if (!isValid) {
+            e.preventDefault();
+          } else {
+            onSubmitForm(form.getValues());
+          }
+        }}
         className="space-y-6 font-cinzel-decorative text-primary-800"
       >
         <FormField
@@ -257,8 +276,9 @@ const BookingRequestForm = ({
             variant="default"
             className="flex-1 bg-primary-500 text-white font-cinzel-decorative"
             type="submit"
+            disabled={isSubmitting}
           >
-            Submit Request
+            {isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </form>

@@ -16,7 +16,7 @@ export const rooms: Room[] = [
     image: "/pheasant_1.png",
     description:
       "Experience comfort in our outdoors-themed suite featuring a premium Sleep Number bed. Adorned with rustic decor and pheasant motifs, this room offers the perfect blend of wilderness charm and modern luxury. Wake up refreshed and ready to explore.",
-    link: "/rooms/the-pheasant-room",
+    link: "/book",
     price: 87,
   },
   {
@@ -24,7 +24,7 @@ export const rooms: Room[] = [
     image: "/oma_1.jpg",
     description:
       "Step into the warmth of our German-inspired suite, where Old World charm meets modern comfort. Featuring elegant European furnishings and delicate touches that honor our German heritage, Oma's Room offers a cozy retreat that feels like visiting grandmother's cherished home.",
-    link: "/rooms/oma-s-room",
+    link: "/book",
     price: 87,
   },
   {
@@ -32,7 +32,7 @@ export const rooms: Room[] = [
     image: "/beach_2.avif",
     description:
       "Escape to coastal tranquility in our beach-themed suite. With soothing ocean colors, seashell accents, and breezy decor, this room captures the essence of seaside living. Drift off to sleep to the gentle ambiance of our coastal-inspired retreat.",
-    link: "/rooms/the-beach-room",
+    link: "/book",
     price: 87,
   },
 ];
