@@ -9,11 +9,7 @@ const PageLayout = ({
 }): JSX.Element => {
   return (
     <>
-      <Header
-        position="relative"
-        textColor="text-primary-800"
-        textColorHover="text-primary-600"
-      />
+      <Header />
       {children}
       <Footer />
     </>

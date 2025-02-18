@@ -12,11 +12,7 @@ export default function Home() {
   return (
     <>
       <SEO title="Home" />
-      <Header
-        position="absolute"
-        textColor="text-primary-100"
-        textColorHover="text-white"
-      />
+      <Header />
       <main>
         <Hero />
         <About />
