@@ -120,6 +120,43 @@ export default function RoomsPage() {
               </div>
             </div>
           </section>
+
+          {/* Entire Basement */}
+          <section className="flex flex-col gap-8">
+            <h2 className="text-3xl md:text-4xl font-cinzel-decorative text-primary-800">
+              Entire Basement
+            </h2>
+            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+              <div className="relative w-full md:w-1/2 aspect-[4/3] rounded-lg overflow-hidden">
+                <Image
+                  src="/house_4.png"
+                  alt="Entire Basement"
+                  fill
+                  className="object-cover"
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <div className="md:w-1/2 space-y-4 text-lg text-primary-800">
+                <p>
+                  Experience the ultimate in lakeside living by booking our
+                  entire basement level. This spacious accommodation includes
+                  all three rooms - The Pheasant Room, Oma&apos;s Room, and The
+                  Beach Room - perfect for larger families or groups. Enjoy
+                  exclusive access to shared spaces and amenities while
+                  maintaining privacy and comfort for your entire party.
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>Three private bedrooms (sleeps up to 6)</li>
+                  <li>Two full bathrooms</li>
+                  <li>Shared living area with lake views</li>
+                  <li>High-speed WiFi throughout</li>
+                  <li>Private entrance</li>
+                  <li>Access to all basement amenities</li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </Container>
     </>

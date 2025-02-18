@@ -1,19 +1,11 @@
-"use client";
-
-import React, { JSX, useState } from "react";
 import Container from "../custom_components/container";
-import BookCard from "../custom_components/bookCard";
-import { Room, rooms } from "../custom_components/home/rooms";
 import PageTitle from "../custom_components/pageTitle";
 import SEO from "../custom_components/seo";
-import BookingModal from "../custom_components/bookingModal";
+import { getRooms } from "@/lib/sanityClient";
+import BookingInterface from "../custom_components/bookingInterface";
 
-const Book = (): JSX.Element => {
-  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-
-  const handleBookClick = (room: Room) => {
-    setSelectedRoom(room);
-  };
+export default async function Book() {
+  const rooms = await getRooms();
 
   return (
     <>
@@ -21,31 +13,9 @@ const Book = (): JSX.Element => {
       <div className="my-24">
         <Container>
           <PageTitle title="Book" path="/book" />
-          <div className="flex flex-col gap-24">
-            {rooms.map((room: Room, i: number) => (
-              <BookCard
-                key={room.name}
-                title={room.name}
-                description={room.description}
-                image={room.image}
-                href={room.link}
-                price={room.price}
-                reverse={i % 2 !== 0}
-                onBookClick={() => handleBookClick(room)}
-              />
-            ))}
-          </div>
+          <BookingInterface rooms={rooms} />
         </Container>
       </div>
-
-      <BookingModal
-        isOpen={!!selectedRoom}
-        onClose={() => setSelectedRoom(null)}
-        room={selectedRoom}
-        onCancel={() => setSelectedRoom(null)}
-      />
     </>
   );
-};
-
-export default Book;
+}

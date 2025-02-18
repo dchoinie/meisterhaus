@@ -1,43 +1,38 @@
-import React, { JSX } from "react";
+import React from "react";
 import Container from "../container";
 import RoomCard from "../roomCard";
+import { getRooms } from "@/lib/sanityClient";
 
 export interface Room {
+  _id: string;
   name: string;
-  image: string;
-  description: string;
-  link: string;
-  price: number;
+  description: {
+    _type: string;
+    style: string;
+    _key: string;
+    markDefs: any[];
+    children: {
+      _type: string;
+      text: string;
+      marks: string[];
+    }[];
+  }[];
+  mainImage: {
+    _type: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  weekdayPrice: string;
+  weekendPrice: string;
 }
 
-export const rooms: Room[] = [
-  {
-    name: "The Pheasant Room",
-    image: "/pheasant_1.png",
-    description:
-      "Experience comfort in our outdoors-themed suite featuring a premium Sleep Number bed. Adorned with rustic decor and pheasant motifs, this room offers the perfect blend of wilderness charm and modern luxury. Wake up refreshed and ready to explore.",
-    link: "/book",
-    price: 87,
-  },
-  {
-    name: "Oma's Room",
-    image: "/oma_1.jpg",
-    description:
-      "Step into the warmth of our German-inspired suite, where Old World charm meets modern comfort. Featuring elegant European furnishings and delicate touches that honor our German heritage, Oma's Room offers a cozy retreat that feels like visiting grandmother's cherished home.",
-    link: "/book",
-    price: 87,
-  },
-  {
-    name: "The Beach Room",
-    image: "/beach_2.avif",
-    description:
-      "Escape to coastal tranquility in our beach-themed suite. With soothing ocean colors, seashell accents, and breezy decor, this room captures the essence of seaside living. Drift off to sleep to the gentle ambiance of our coastal-inspired retreat.",
-    link: "/book",
-    price: 87,
-  },
-];
+const Rooms = async () => {
+  const rooms = await getRooms();
 
-const Rooms = (): JSX.Element => {
+  console.log(rooms);
+
   return (
     <div>
       <Container>
@@ -45,14 +40,15 @@ const Rooms = (): JSX.Element => {
           <h2 className="text-4xl font-bold text-center font-cinzel-decorative text-primary-500 mb-24">
             The Rooms
           </h2>
-          <div className="grid grid-cols-3 gap-12">
-            {rooms.map((room) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+            {rooms.map((room: Room) => (
               <RoomCard
-                key={room.name}
+                key={room._id}
                 name={room.name}
-                image={room.image}
                 description={room.description}
-                link={room.link}
+                image={room.mainImage}
+                weekdayPrice={room.weekdayPrice}
+                weekendPrice={room.weekendPrice}
               />
             ))}
           </div>

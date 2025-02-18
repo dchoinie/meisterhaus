@@ -11,20 +11,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { urlFor } from "@/lib/sanityClient";
 
 interface RoomCardProps {
   name: string;
-  image: string;
   description: string;
-  link: string;
+  image: {
+    _type: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  weekdayPrice: string;
+  weekendPrice: string;
 }
 
 const RoomCard = ({
   name,
-  image,
   description,
-  link,
+  image,
+  weekdayPrice,
+  weekendPrice,
 }: RoomCardProps): JSX.Element => {
+  const imageUrl = urlFor(image).url();
+  const descriptionText = Array.isArray(description)
+    ? description[0]?.children[0]?.text || ""
+    : description;
+
   return (
     <Card className="shadow-lg flex flex-col h-full">
       <CardHeader>
@@ -32,18 +46,27 @@ const RoomCard = ({
           {name}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent className="flex-grow space-y-6">
         <AspectRatio ratio={16 / 9}>
-          <Image src={image} alt={name} fill className="object-cover" />
+          <Image src={imageUrl} alt={name} fill className="object-cover" />
         </AspectRatio>
-        <CardDescription className="mt-6">{description}</CardDescription>
+        <CardDescription>{descriptionText}</CardDescription>
+        <div className="space-y-2">
+          <p className="font-cinzel-decorative text-primary-800">
+            Weekday: <span className="font-bold">{weekdayPrice}/night</span>
+          </p>
+          <p className="font-cinzel-decorative text-primary-800">
+            Weekend/Holiday:{" "}
+            <span className="font-bold">{weekendPrice}/night</span>
+          </p>
+        </div>
       </CardContent>
-      <CardFooter className="mt-auto">
+      <CardFooter className="pt-6">
         <Button
           asChild
-          className="bg-primary-500 hover:bg-primary-600 text-white font-cinzel-decorative"
+          className="w-full bg-primary-500 hover:bg-primary-600 text-white font-cinzel-decorative"
         >
-          <Link href={link}>Request Booking</Link>
+          <Link href="/book">Request Booking</Link>
         </Button>
       </CardFooter>
     </Card>

@@ -2,62 +2,82 @@ import React, { JSX } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
+import { urlFor } from "@/lib/sanityClient";
 
-export interface BookCardProps {
-  title: string;
-  description: string;
-  image: string;
-  href: string;
-  price: number;
-  reverse?: boolean;
+interface BookCardProps {
+  room: {
+    _id: string;
+    name: string;
+    description: {
+      _type: string;
+      style: string;
+      _key: string;
+      markDefs: any[];
+      children: {
+        _type: string;
+        text: string;
+        marks: string[];
+      }[];
+    }[];
+    mainImage: {
+      _type: string;
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+    };
+    weekdayPrice: string;
+    weekendPrice: string;
+  };
   onBookClick: () => void;
 }
 
-const BookCard = ({
-  title,
-  description,
-  image,
-  price,
-  reverse = false,
-  onBookClick,
-}: BookCardProps): JSX.Element => {
+const BookCard = ({ room, onBookClick }: BookCardProps): JSX.Element => {
+  const imageUrl = urlFor(room.mainImage).url();
+  const descriptionText = Array.isArray(room.description)
+    ? room.description[0]?.children[0]?.text || ""
+    : room.description;
+
   return (
-    <div className="border border-primary-200 rounded-lg p-6 h-full">
-      <div className={`flex gap-12 ${reverse ? "flex-row-reverse" : ""}`}>
-        <div className="w-1/2 relative">
-          <AspectRatio ratio={16 / 9}>
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="h-auto w-full shadow-lg"
-              quality={100}
-            />
-          </AspectRatio>
+    <Card className="shadow-lg flex flex-col h-full">
+      <CardHeader>
+        <CardTitle className="font-cinzel-decorative text-primary-500">
+          {room.name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex-grow space-y-6">
+        <AspectRatio ratio={16 / 9}>
+          <Image src={imageUrl} alt={room.name} fill className="object-cover" />
+        </AspectRatio>
+        <CardDescription>{descriptionText}</CardDescription>
+        <div className="space-y-2">
+          <p className="font-cinzel-decorative text-primary-800">
+            Weekday:{" "}
+            <span className="font-bold">{room.weekdayPrice}/night</span>
+          </p>
+          <p className="font-cinzel-decorative text-primary-800">
+            Weekend/Holiday:{" "}
+            <span className="font-bold">{room.weekendPrice}/night</span>
+          </p>
         </div>
-        <div className="flex flex-col w-1/2 justify-between">
-          <div>
-            <h2 className="text-3xl font-cinzel-decorative font-bold text-primary-500 mb-3">
-              {title}
-            </h2>
-            <p className="text-gray-500 text-base mb-4">{description}</p>
-            <div className="flex">
-              <span className="text-2xl font-bold font-cinzel-decorative text-primary-500">
-                ${price.toFixed(2)}
-                <span className="text-sm text-gray-500">/night</span>
-              </span>
-            </div>
-          </div>
-          <Button
-            onClick={onBookClick}
-            variant="default"
-            className="bg-primary-500 text-white"
-          >
-            Request Booking
-          </Button>
-        </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter className="mt-auto pt-6">
+        <Button
+          onClick={onBookClick}
+          className="w-full bg-primary-500 hover:bg-primary-600 text-white font-cinzel-decorative"
+        >
+          Book Now
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
