@@ -32,8 +32,6 @@ export interface Room {
 const Rooms = async () => {
   const rooms = await getRooms();
 
-  console.log(rooms);
-
   return (
     <div>
       <Container>
