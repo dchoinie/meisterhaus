@@ -20,6 +20,7 @@ interface BookCardProps {
       _type: string;
       style: string;
       _key: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       markDefs: any[];
       children: {
         _type: string;

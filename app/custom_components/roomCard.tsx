@@ -15,7 +15,17 @@ import { urlFor } from "@/lib/sanityClient";
 
 interface RoomCardProps {
   name: string;
-  description: string;
+  description: {
+    _type: string;
+    style: string;
+    _key: string;
+    markDefs: any[];
+    children: {
+      _type: string;
+      text: string;
+      marks: string[];
+    }[];
+  }[];
   image: {
     _type: string;
     asset: {
