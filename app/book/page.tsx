@@ -10,7 +10,7 @@ export default async function Book() {
   return (
     <>
       <SEO title="Book" />
-      <div className="pt-24">
+      <div className="pt-24 mb-24">
         <Container>
           <PageTitle title="Book" path="/book" />
           <BookingInterface rooms={rooms} />
