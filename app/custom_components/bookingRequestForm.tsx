@@ -20,10 +20,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Room } from "./home/rooms";
 
 interface BookingRequestFormProps {
   onSubmit: (data: z.infer<typeof bookingFormSchema>) => void;
   onCancel: () => void;
+  room: Room;
 }
 
 export const bookingFormSchema = z
@@ -49,6 +51,7 @@ export const bookingFormSchema = z
     numberOfChildren: z.number().min(0, {
       message: "Number of children is required",
     }),
+    room: z.string(),
   })
   .refine(
     (data) => {
@@ -63,6 +66,7 @@ export const bookingFormSchema = z
 const BookingRequestForm = ({
   onSubmit,
   onCancel,
+  room,
 }: BookingRequestFormProps) => {
   const [checkInOpen, setCheckInOpen] = React.useState(false);
   const [checkOutOpen, setCheckOutOpen] = React.useState(false);
@@ -78,6 +82,7 @@ const BookingRequestForm = ({
       checkOutDate: undefined,
       numberOfGuests: 0,
       numberOfChildren: 0,
+      room: room.name,
     },
   });
 
@@ -105,11 +110,32 @@ const BookingRequestForm = ({
           if (!isValid) {
             e.preventDefault();
           } else {
-            onSubmitForm(form.getValues());
+            const values = form.getValues();
+            onSubmitForm(values);
           }
         }}
         className="space-y-6 font-cinzel-decorative text-primary-800"
       >
+        {/* Hidden inputs for date fields and room */}
+        <input type="hidden" name="room" value={room.name} />
+        <input
+          type="hidden"
+          name="checkInDate"
+          value={
+            form.getValues("checkInDate")
+              ? format(form.getValues("checkInDate"), "yyyy-MM-dd")
+              : ""
+          }
+        />
+        <input
+          type="hidden"
+          name="checkOutDate"
+          value={
+            form.getValues("checkOutDate")
+              ? format(form.getValues("checkOutDate"), "yyyy-MM-dd")
+              : ""
+          }
+        />
         <FormField
           control={form.control}
           name="fullName"
@@ -188,7 +214,7 @@ const BookingRequestForm = ({
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage />
+              <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />
@@ -232,7 +258,7 @@ const BookingRequestForm = ({
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage />
+              <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />

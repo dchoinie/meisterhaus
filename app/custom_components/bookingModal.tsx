@@ -46,7 +46,11 @@ const BookingModal = ({
         </DialogHeader>
 
         <div>
-          <BookingRequestForm onSubmit={onSubmit} onCancel={onCancel} />
+          <BookingRequestForm
+            onSubmit={onSubmit}
+            onCancel={onCancel}
+            room={room}
+          />
         </div>
       </DialogContent>
     </Dialog>
