@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Hero from "./custom_components/home/hero";
 import About from "./custom_components/home/about";
 import Rooms from "./custom_components/home/rooms";
